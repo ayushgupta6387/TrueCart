@@ -1,6 +1,8 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken"); // To generate signed token
+const expressJwt = require("express-jwt"); // For authorization check
 // import routes
 const useRoutes = require('./routes/user');
 
