@@ -9,10 +9,12 @@ const morgan = require('morgan');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser'); // We are saving the user credentials in the cookie
+const expressValidator = require('express-validator');
 
+require('dotenv').config();
 // app
 const app = express();
-require('dotenv').config();
+
 
 // db
 mongoose
@@ -28,6 +30,7 @@ mongoose
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(expressValidator());
 
 // routes middleware
 app.use('/api', useRoutes);
