@@ -1,7 +1,9 @@
 // Importing the userSchema model
 const User = require('../models/user');
 
+// handling different types of error by routing it to dbErrorHandler.js
 const { errorHandler } = require('../helpers/dbErrorHandler');
+
 exports.signup = (req, res) => {
 	console.log(req.body);
 	const user = new User(req.body);
@@ -11,6 +13,9 @@ exports.signup = (req, res) => {
 				err: errorHandler(err),
 			});
 		}
+
+		user.salt = undefined;
+		user.hashed_password = undefined;
 		res.json({ 
 			user,
 		});
