@@ -13,7 +13,8 @@ exports.signup = (req, res) => {
 				err: errorHandler(err),
 			});
 		}
-
+		
+		// This will make our hashed password and salt string not visible in database
 		user.salt = undefined;
 		user.hashed_password = undefined;
 		res.json({ 
