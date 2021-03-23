@@ -1,5 +1,6 @@
 // Importing the userSchema model
 const User = require('../models/user');
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 // handling different types of error by routing it to dbErrorHandler.js
@@ -59,7 +60,7 @@ exports.signout = (req, res) => {
 
 // If we want to restrict any route we can use requireSignin
 exports.requireSignin = expressJwt({
-	secret: 'Yep Bro',
+	secret: process.env.JWT_SECRET,
 	algorithms: ['HS256'], // added later
 	userProperty: 'auth',
 });
