@@ -1,25 +1,41 @@
-const express = require("express");
+
+const express = require('express');
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken"); // To generate signed token
+const expressJwt = require("express-jwt"); // For authorization check
 // import routes
-const useRoutes = require('./routes/user')
+const authRoutes = require('./routes/auth');
 
+// It gives all the route sort of roads that have been requested in the console
+const morgan = require('morgan');
 
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser'); // We are saving the user credentials in the cookie
+const expressValidator = require('express-validator');
+
+require('dotenv').config();
 // app
 const app = express();
-require("dotenv").config();
+
 
 // db
-mongoose.connect(process.env.DATABASE, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
-}).then(()=> console.log("DATABASE CONNECTED"));
+mongoose
+	.connect(process.env.DATABASE, {
+		useNewUrlParser: true,
+		useCreateIndex: true,
+		useFindAndModify: false,
+		useUnifiedTopology: true,
+	})
+	.then(() => console.log('DATABASE CONNECTED'));
 
+// middlewares
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(expressValidator());
 
 // routes middleware
-app.use("/api",useRoutes);
-
+app.use('/api', authRoutes);
 
 // this is written before using routes
 // app.get('/', (req, res)=>{
@@ -28,9 +44,6 @@ app.use("/api",useRoutes);
 
 const port = process.env.PORT || 8000;
 
-app.listen(port, ()=>{
-    console.log(`Server is running on port ${port}`);
+app.listen(port, () => {
+	console.log(`Server is running on port ${port}`);
 });
-
-
-
