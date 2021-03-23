@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { signup, signin, signout } = require('../controllers/user');
+const { signup, signin, signout, requireSignin } = require('../controllers/user');
 const { userSignupValidator } = require('../validate/index');
 
 // For sign up a new user
@@ -16,5 +16,10 @@ router.post('/signin', signin);
 
 // For signing out 
 router.get('/signout', signout);
+
+// This will only run when the user is login beacuse we restrict the route by log in
+// router.get('/hello', requireSignin, (req, res) => {
+// 	res.send('hello there');
+// });
 
 module.exports = router;

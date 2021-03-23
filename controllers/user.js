@@ -1,6 +1,7 @@
 // Importing the userSchema model
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 // handling different types of error by routing it to dbErrorHandler.js
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
@@ -56,3 +57,10 @@ exports.signout = (req, res) => {
 	res.clearCookie('t');
 	res.json({ message: 'Sign Out success' });
 };
+
+// If we want to restrict any route we can use requireSignin
+exports.requireSignin = expressJwt({
+	secret: "Yep Bro",
+	algorithms: ['HS256'], // added later
+	userProperty: 'auth',
+});
