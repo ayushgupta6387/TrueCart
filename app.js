@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken"); // To generate signed token
 const expressJwt = require("express-jwt"); // For authorization check
 // import routes
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 // It gives all the route sort of roads that have been requested in the console
 const morgan = require('morgan');
@@ -36,6 +37,7 @@ app.use(expressValidator());
 
 // routes middleware
 app.use('/api', authRoutes);
+app.use('/api', userRoutes);
 
 // this is written before using routes
 // app.get('/', (req, res)=>{
