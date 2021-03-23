@@ -1,3 +1,5 @@
+
+
 // Requirring mongosse
 const mongoose = require('mongoose');
 
@@ -5,7 +7,7 @@ const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 // This is for generating unique strings
-const uuidvl = require('uuid/v1');
+const { v1 } = require('uuid');
 
 // Creating user schema
 const userSchema = new mongoose.Schema(
@@ -50,7 +52,7 @@ userSchema
 		this._password = password;
 		this.salt = uuidv1(); // this will give us random string that we are going to use in hashing
 		this.hashed_password = this.encryptPassword(password); // this method wil encrypt the password
-    })
+	})
 	.get(function () {
 		return this._password;
 	});
