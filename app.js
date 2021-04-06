@@ -7,6 +7,7 @@ const expressJwt = require("express-jwt"); // For authorization check
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
+const productRoutes = require('./routes/product');
 
 // It gives all the route sort of roads that have been requested in the console
 const morgan = require('morgan');
@@ -40,6 +41,8 @@ app.use(expressValidator());
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', productRoutes);
+
 // this is written before using routes
 // app.get('/', (req, res)=>{
 //     res.send("Hello!")
