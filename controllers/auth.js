@@ -59,7 +59,7 @@ exports.signout = (req, res) => {
 };
 
 // If we want to restrict any route we can use requireSignin
-exports.requireSignin = expressJwt({
+exports.requireSign = expressJwt({
 	secret: process.env.JWT_SECRET,
 	algorithms: ['HS256'], // added later
 	userProperty: 'auth',
