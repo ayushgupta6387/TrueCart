@@ -3,9 +3,9 @@ const router = express.Router();
 
 const { requireSign, isAuth, isAdmin } = require('../controllers/auth');
 const { userById } = require('../controllers/user');
+const { productById, read } = require('../controllers/product');
 
-// For sign up a new user
-router.param('userId', userById);
+
 
 router.get('/secret/:userId', requireSign, isAuth, isAdmin, (req, res) => {
 	res.json({
@@ -13,5 +13,10 @@ router.get('/secret/:userId', requireSign, isAuth, isAdmin, (req, res) => {
 	});
 });
 
+router.get('/product/:productId', read);
+
+// For sign up a new user
+router.param('userId', userById);
+router.param('productId', productById);
 
 module.exports = router;
