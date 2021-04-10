@@ -15,6 +15,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser'); // We are saving the user credentials in the cookie
 const expressValidator = require('express-validator');
+const cors = require("cors");
 
 require('dotenv').config();
 // app
@@ -36,6 +37,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors());
 
 // routes middleware
 app.use('/api', authRoutes);
