@@ -2,16 +2,20 @@ const express = require('express');
 const router = express.Router();
 
 const { requireSign, isAuth, isAdmin } = require('../controllers/auth');
-const { userById } = require('../controllers/user');
+const { userById, read, purchaseHistory } = require('../controllers/user');
 
 
 
 
-router.get('/secret/:userId', requireSign, isAuth, isAdmin, (req, res) => {
+router.get('/secret', requireSign, (req, res) => {
 	res.json({
-		user: req.profile,
+		user: 'got here yay',
 	});
 });
+
+router.get('/user/:userId', requireSign, isAuth, read);
+router.put('/user/:userId', requireSign, isAuth, update);
+router.get('/orders/by/user/:userId', requireSign, isAuth, purchaseHistory);
 
 
 // For sign up a new user
