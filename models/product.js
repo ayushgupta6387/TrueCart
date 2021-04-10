@@ -1,9 +1,6 @@
-// Requirring mongosse
 const mongoose = require('mongoose');
-
 const { ObjectId } = mongoose.Schema;
 
-// Creating user schema
 const productSchema = new mongoose.Schema(
 	{
 		name: {
@@ -25,11 +22,15 @@ const productSchema = new mongoose.Schema(
 		},
 		category: {
 			type: ObjectId,
-			ref: 'Category', // Working in relation ship with category model
+			ref: 'Category',
 			required: true,
 		},
 		quantity: {
 			type: Number,
+		},
+		sold: {
+			type: Number,
+			default: 0,
 		},
 		photo: {
 			data: Buffer,
