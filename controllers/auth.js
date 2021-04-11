@@ -19,7 +19,7 @@ exports.signup = (req, res) => {
 		// This will make our hashed password and salt string not visible in database
 		user.salt = undefined;
 		user.hashed_password = undefined;
-		res.json({ user });
+		return res.json({ user });
 	});
 };
 
@@ -30,7 +30,7 @@ exports.signin = (req, res) => {
 		if (err || !user) {
 			return res.status(400).json({
 				err: 'user with that email does not exit. Please signup',
-			});
+			});	
 		}
 
 		// If user is found make sure the email and password match
@@ -59,7 +59,7 @@ exports.signout = (req, res) => {
 };
 
 // If we want to restrict any route we can use requireSignin
-exports.requireSignin = expressJwt({
+exports.requireSign = expressJwt({
 	secret: process.env.JWT_SECRET,
 	algorithms: ['HS256'], // added later
 	userProperty: 'auth',
