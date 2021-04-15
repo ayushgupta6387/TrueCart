@@ -1,5 +1,5 @@
 // Importing the userSchema model
-const User = require('../models/user');
+const User = require('../../models/user');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
