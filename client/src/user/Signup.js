@@ -69,6 +69,14 @@ const showError = () => (
 		{error}
 	</div>
 );
+const showSuccess = () => (
+	<div
+		className="alert alert-info"
+		style={{ display: success ? "" : "none" }}
+	>
+		{error}
+	</div>
+);
 
 
 	const signUpForm = () =>(
