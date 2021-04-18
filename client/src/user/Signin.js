@@ -88,6 +88,10 @@ const Signin = () => {
                 return <Redirect to="/user/dashboard" />;
             }
         }
+		// if user try to search for admin redirect to home page
+		if (isAuthenticated()){
+			return <Redirect to="/" />
+		}
     };
 
     return (
