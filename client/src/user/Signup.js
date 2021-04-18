@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import {Link} from 'react-router-dom';
 import Layout from '../core/Layout';
 
 import { API } from "../config";
@@ -15,7 +15,7 @@ const [values, setValues] = useState({
 });
 
 // destructure
-const {name, email, password} = values;
+const {name, email, password, success, error} = values;
 
 // name could be name or email or password
 const handleChange = name => event => {
@@ -24,6 +24,7 @@ const handleChange = name => event => {
 
 const clickSubmit = event => {
 	event.preventDefault();
+	setValues({...values, error:false})
 	signup({ name, email, password }) // key and value are same
 	.then(data => {
 		if (data.error) {
@@ -45,7 +46,7 @@ const clickSubmit = event => {
 const signup = user => {
 // console.log(name, email, password);
 // send data to backend
-fetch(`${API}/signup`, {
+return fetch(`${API}/signup`, {
 	method: "POST",
 	headers: {
 		Accept: "application/json",
@@ -74,7 +75,7 @@ const showSuccess = () => (
 		className="alert alert-info"
 		style={{ display: success ? "" : "none" }}
 	>
-		{error}
+		New account is created. Please <Link to="/signin">Signin</Link> 
 	</div>
 );
 
@@ -112,8 +113,10 @@ const showSuccess = () => (
 		 description="Node React E-commerce App"
 		 className="container col-md-8 offset-md-2"
 		>
+		{showSuccess()}
+		{showError()}
 		{signUpForm()}
-		{JSON.stringify(values)}
+		{/* {JSON.stringify(values)} */}
 		</Layout>
 	);
 };
