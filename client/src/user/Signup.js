@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import Layout from '../core/Layout';
+import {signUp} from '../auth';
 
-import { API } from "../config";
 
 const Signup = () => {
 
@@ -25,7 +25,7 @@ const handleChange = name => event => {
 const clickSubmit = event => {
 	event.preventDefault();
 	setValues({...values, error:false})
-	signup({ name, email, password }) // key and value are same
+	signUp({ name, email, password }) // key and value are same
 	.then(data => {
 		if (data.error) {
 			// ...values - rest operator (grab all the values)
@@ -43,24 +43,6 @@ const clickSubmit = event => {
 	})
 };
 
-const signup = user => {
-// console.log(name, email, password);
-// send data to backend
-return fetch(`${API}/signup`, {
-	method: "POST",
-	headers: {
-		Accept: "application/json",
-		"Content-Type": "application/json"
-	},
-	body: JSON.stringify(user)
-})
-	.then(response => {
-		return response.json();
-	})
-	.catch(err => {
-		console.log(err);
-	});
-};
 
 const showError = () => (
 	<div
