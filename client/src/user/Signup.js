@@ -12,6 +12,7 @@ const [values, setValues] = useState({
 	success: false
 })
 
+// name could be name or email or password
 const handleChange = name => event => {
 	setValues({ ...values, error: false, [name]: event.target.value });
 };
@@ -45,6 +46,7 @@ const handleChange = name => event => {
 		 className="container col-md-8 offset-md-2"
 		>
 		{signUpForm()}
+		{JSON.stringify(values)}
 		</Layout>
 	);
 };
