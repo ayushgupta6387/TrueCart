@@ -21,4 +21,11 @@ products to the users with the best price.
 1-Mar-2021
   Synopsis Submission
 
+3-Mar-2021
+  Backend work starts
+ 
+20-Mar-2021
+  Backend work finish
 
+25-Mar-2021
+  Frontend work starts
