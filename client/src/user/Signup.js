@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 
 import Layout from '../core/Layout';
 
+import { API } from "../config";
+
 const Signup = () => {
 
 const [values, setValues] = useState({
@@ -22,7 +24,26 @@ const handleChange = name => event => {
 
 const clickSubmit = event => {
 	event.preventDefault();
-	signup({ name, email, password });
+	signup({ name, email, password }); // key and value are same
+};
+
+const signup = user => {
+// console.log(name, email, password);
+// send data to backend
+fetch(`${API}/signup`, {
+	method: "POST",
+	headers: {
+		Accept: "application/json",
+		"Content-Type": "application/json"
+	},
+	body: JSON.stringify(user)
+})
+	.then(response => {
+		return response.json();
+	})
+	.catch(err => {
+		console.log(err);
+	});
 };
 
 	const signUpForm = () =>(
