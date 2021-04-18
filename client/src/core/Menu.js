@@ -22,7 +22,7 @@ const Menu = ({ history}) => {
 				</li>
 
 				<li className="nav-item">
-					<Link className="nav-link" style={isActive(history, '/dashboard')} to="/dashboard">
+					<Link className="nav-link" style={isActive(history, '/user/dashboard')} to="/user/dashboard">
 						User Dashboard
 					</Link>
 				</li>
