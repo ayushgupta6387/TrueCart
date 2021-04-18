@@ -3,9 +3,34 @@ import React from 'react';
 import Layout from '../core/Layout';
 
 const Signup = () => {
+
+	const signUpForm = () =>(
+		<form>
+			<div className="form-group">
+				<label className="text-muted">Name</label>
+				<input type="text" className="form-control"/>
+			</div>
+
+			<div className="form-group">
+				<label className="text-muted">Email</label>
+				<input type="email" className="form-control"/>
+			</div>
+
+			<div className="form-group">
+				<label className="text-muted">Password</label>
+				<input type="password" className="form-control"/>
+			</div>
+
+			<button className="btn btn-primary">Submit</button>
+
+		</form>
+	)
+
 	return (
-		<Layout title="SignupPage" description="Node React E-commerce App">
-		{process.env.REACT_APP_API_URL}
+		<Layout title="SignupPage"
+		 description="Node React E-commerce App"
+		>
+		{signUpForm()}
 		</Layout>
 	);
 };
