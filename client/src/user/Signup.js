@@ -10,13 +10,20 @@ const [values, setValues] = useState({
 	password:'',
 	error:'',
 	success: false
-})
+});
+
+// destructure
+const {name, email, password} = values;
 
 // name could be name or email or password
 const handleChange = name => event => {
 	setValues({ ...values, error: false, [name]: event.target.value });
 };
 
+const clickSubmit = event => {
+	event.preventDefault();
+	signup({ name, email, password });
+};
 
 	const signUpForm = () =>(
 		<form>
@@ -35,7 +42,7 @@ const handleChange = name => event => {
 				<input onChange={handleChange('password')} type="password" className="form-control"/>
 			</div>
 
-			<button className="btn btn-primary">Submit</button>
+			<button onClick={clickSubmit} className="btn btn-primary">Submit</button>
 
 		</form>
 	)
