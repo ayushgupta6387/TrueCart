@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import Layout from "../core/Layout";
-import { signIn } from "../auth";
+import { signIn, authenticate } from "../auth";
 
 const Signin = () => {
     const [values, setValues] = useState({
@@ -26,10 +26,12 @@ const Signin = () => {
             if (data.error) {
                 setValues({ ...values, error: data.error, loading: false });
             } else {
+				authenticate(data, () =>{
                 setValues({
                     ...values,
                     redirectToReferrer: true
                 });
+			})
             }
         });
     };
@@ -89,7 +91,7 @@ const Signin = () => {
             description="Signin to Node React E-commerce App"
             className="container col-md-8 offset-md-2"
         >
-		
+
             {showLoading()}
             {showError()}
             {signUpForm()}
