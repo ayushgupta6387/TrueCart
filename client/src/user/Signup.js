@@ -61,6 +61,16 @@ fetch(`${API}/signup`, {
 	});
 };
 
+const showError = () => (
+	<div
+		className="alert alert-danger"
+		style={{ display: error ? "" : "none" }}
+	>
+		{error}
+	</div>
+);
+
+
 	const signUpForm = () =>(
 		<form>
 			<div className="form-group">
