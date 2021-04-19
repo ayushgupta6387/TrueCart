@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { createProduct } from "./apiAdmin";
 
 const AddProduct = () => {
-    // destructure
-    const { user, token } = isAuthenticated();
     const [values, setValues] = useState({
         name: "",
         description: "",
@@ -22,8 +20,8 @@ const AddProduct = () => {
         redirectToProfile: false,
         formData: ""
     });
-    // destructure
 
+    const { user, token } = isAuthenticated();
     const {
         name,
         description,
@@ -39,14 +37,17 @@ const AddProduct = () => {
         formData
     } = values;
 
-    // this method runs when the component mounts and when value changed 
+    // this method runs when the component mounts and when value changed
     useEffect(() => {
         setValues({ ...values, formData: new FormData() });
     }, []);
 
+    
+
 // all the data goes into formData and then to backend
 
-    // function returning another function (higher order func.)
+
+// function returning another function (higher order func.)
     const handleChange = name => event => {
         const value =
             name === "photo" ? event.target.files[0] : event.target.value;
@@ -54,11 +55,27 @@ const AddProduct = () => {
         setValues({ ...values, [name]: value });
     };
 
-    
     const clickSubmit = event => {
-        //
-    };
+        event.preventDefault();
+        setValues({ ...values, error: "", loading: true });
 
+        createProduct(user._id, token, formData).then(data => {
+            if (data.error) {
+                setValues({ ...values, error: data.error });
+            } else {
+                setValues({
+                    ...values,
+                    name: "",
+                    description: "",
+                    photo: "",
+                    price: "",
+                    quantity: "",
+                    loading: false,
+                    createdProduct: data.name
+                });
+            }
+        });
+    };
 
     const newPostForm = () => (
         <form className="mb-3" onSubmit={clickSubmit}>
@@ -110,6 +127,7 @@ const AddProduct = () => {
                     className="form-control"
                 >
                     <option value="5cde522ad8b1ff1b89c36987">Python</option>
+                    <option value="5cde522ad8b1ff1b89c36987">PHP</option>
                 </select>
             </div>
 
@@ -137,15 +155,14 @@ const AddProduct = () => {
             <button className="btn btn-outline-primary">Create Product</button>
         </form>
     );
+
     return (
         <Layout
             title="Add a new product"
             description={`G'day ${user.name}, ready to add a new product?`}
         >
             <div className="row">
-                <div className="col-md-8 offset-md-2">
-                    {newPostForm()}
-                </div>
+                <div className="col-md-8 offset-md-2">{newPostForm()}</div>
             </div>
         </Layout>
     );
