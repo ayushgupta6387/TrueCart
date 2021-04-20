@@ -1,10 +1,45 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Layout  from './Layout';
+import {getProducts} from './apiCore';
 
 const Home = () => {
+	// hold product by sell and arrival
+	const [productsBySell, setProductsBySell] = useState([]);
+    const [productsByArrival, setProductsByArrival] = useState([]);
+    const [error, setError] = useState(false);
+
+	const loadProductsBySell = () => {
+		// sort by sold
+        getProducts("sold").then(data => {
+            if (data.error) {
+                setError(data.error);
+            } else {
+                setProductsBySell(data);
+            }
+        });
+    };
+
+    const loadProductsByArrival = () => {
+        getProducts("createdAt").then(data => {
+            if (data.error) {
+                setError(data.error);
+            } else {
+                setProductsByArrival(data);
+            }
+        });
+    };
+
+// it will run when component is load for the first time and whenever their is change in state
+useEffect(() => {
+	loadProductsByArrival();
+	loadProductsBySell();
+}, []);
+
 	return (
 		<Layout title="HomePage" description="Node React E-commerce App">
-		
+		  {JSON.stringify(productsByArrival)}
+            <hr />
+            {JSON.stringify(productsBySell)}
 		</Layout>
 	);
 };
