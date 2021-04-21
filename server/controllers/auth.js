@@ -65,6 +65,7 @@ exports.requireSign = expressJwt({
 	userProperty: 'auth',
 });
 
+
 // One is for authenticate the user and one is for admin
 exports.isAuth = (req, res, next) => {
 	let user = req.profile && req.auth && req.profile._id == req.auth._id;
