@@ -26,3 +26,23 @@ export const addItem = (item, next) => {
         next();
     }
 };
+
+// give the total item in cart
+export const itemTotal = () => {
+    if (typeof window !== "undefined") {
+        if (localStorage.getItem("cart")) {
+            return JSON.parse(localStorage.getItem("cart")).length;
+        }
+    }
+    return 0;
+};
+
+// get cart item from localstorage
+export const getCart = () => {
+    if (typeof window !== "undefined") {
+        if (localStorage.getItem("cart")) {
+            return JSON.parse(localStorage.getItem("cart"));
+        }
+    }
+    return [];
+};
