@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
 const productRoutes = require('./routes/product');
+const braintreeRoutes = require('./routes/braintree');
 
 // It gives all the route sort of roads that have been requested in the console
 const morgan = require('morgan');
@@ -44,6 +45,7 @@ app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
+app.use('/api', braintreeRoutes);
 
 // this is written before using routes
 // app.get('/', (req, res)=>{
