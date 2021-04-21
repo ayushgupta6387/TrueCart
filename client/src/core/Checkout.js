@@ -4,21 +4,23 @@ import {
     getBraintreeClientToken,
     processPayment
 } from "./apiCore";
+import {emptyCart} from './cartHelpers';
 import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import DropIn from "braintree-web-drop-in-react";
 
 
-const Checkout = ({ products }) => {
+const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
 // for braintree
 const [data, setData] = useState({
+    loading: false,
     success: false,
     clientToken: null,
-    error: "",
+    error: '',
     instance: {},
-    address: ""
+    address: ''
 });
 
 const userId = isAuthenticated() && isAuthenticated().user._id;
@@ -58,6 +60,7 @@ useEffect(() => {
 
 
     const buy = () => {
+        setData({loading: true})
         // send the nonce to your server
         // nonce = data.instance.requestPaymentMethod()
         let nonce;
@@ -82,10 +85,18 @@ useEffect(() => {
                 .then(response => {
                     // console.log(response)
                     setData({ ...data, success: response.success });
+                    emptyCart(() => {
+                        setRun(!run);
+                        console.log("payment success and empty cart");
+                        setData({loading: false})
+                    });
                     // empty cart
                     // create order
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    console.log(error)
+                    setData({loading: false})
+                });
             })
             .catch(error => {
                 // console.log("dropin error: ", error);
@@ -99,7 +110,11 @@ useEffect(() => {
                 <div>
                     <DropIn
                         options={{
-                            authorization: data.clientToken
+                            authorization: data.clientToken,
+                            // --------------------- to link paypal
+                            // paypal:{
+                            //     flow:"vault"
+                            // }
                         }}
                         onInstance={instance => (data.instance = instance)}
                     />
@@ -126,10 +141,13 @@ useEffect(() => {
         </div>
     );
 
+    const showLoading = (loading) => loading && <h2>Loading...</h2>
+    
 
     return (
         <div>
             <h2>Total: ${getTotal()}</h2>
+            {showLoading(data.loading)}
             {showSuccess(data.success)}
             {showError(data.error)}
             {showCheckout()}
