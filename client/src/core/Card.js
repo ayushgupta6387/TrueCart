@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import { Link, Redirect } from "react-router-dom";
 import ShowImage from './ShowImage';
 import moment  from 'moment';
-import {addItem} from './cartHelpers';
+import {addItem, updateItem} from './cartHelpers';
 
 // to show the product on home page
-const Card = ({ product, showViewProductButton = true }) => {
+const Card = ({ product, showViewProductButton = true, showAddToCartButton=true, cartUpdate=false }) => {
 
     const [redirect, setRedirect] = useState(false);
+    const [count, setCount] = useState(product.count);
 
 
     const showViewButton = showViewProductButton => {
@@ -35,8 +36,9 @@ const Card = ({ product, showViewProductButton = true }) => {
     };
 
 
-    const showAddToCartButton = () => {
-        return (
+    const showAddToCart = (showAddToCartButton) => {
+        return showAddToCartButton &&
+        (
             <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2">
                 Add to cart
             </button>
@@ -49,6 +51,36 @@ const Card = ({ product, showViewProductButton = true }) => {
             <span className="badge badge-primary badge-pill">In Stock</span>
         ) : (
             <span className="badge badge-primary badge-pill">Out of Stock</span>
+        );
+    };
+
+    
+    const handleChange = productId => event => {
+        setCount(event.target.value < 1 ? 1 : event.target.value);
+        if (event.target.value >= 1) {
+            updateItem(productId, event.target.value);
+        }
+    };
+
+    const showCartUpdateOptions = cartUpdate => {
+        return (
+            cartUpdate && (
+                <div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text">
+                                Adjust Quantity
+                            </span>
+                        </div>
+                        <input
+                            type="number"
+                            className="form-control"
+                            value={count}
+                            onChange={handleChange(product._id)}
+                        />
+                    </div>
+                </div>
+            )
         );
     };
 
@@ -70,7 +102,9 @@ const Card = ({ product, showViewProductButton = true }) => {
                         {showViewButton(showViewProductButton)}
                     
                     
-                        {showAddToCartButton()}
+                        {showAddToCart(showAddToCartButton)}
+
+                        {showCartUpdateOptions(cartUpdate)}
                 </div>
             </div>
         
