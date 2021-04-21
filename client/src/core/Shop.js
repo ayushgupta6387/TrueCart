@@ -3,8 +3,15 @@ import Layout from "./Layout";
 import Card from "./Card";
 import {getCategories} from './apiCore';
 import Checkbox from './Checkbox';
+import {prices} from './fixedPrices';
+
 
 const Shop = () => {
+
+    const [myFilters, setMyFilters] = useState({
+        filters: { category: [], price: [] }
+    });
+
     // create state to hold those categories
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState(false);
@@ -24,6 +31,12 @@ const init = () => {
     }, [])
 
 
+    const handleFilters = (filters, filterBy) => {
+        // console.log("SHOP", filters, filterBy);
+        const newFilters = { ...myFilters };
+        newFilters.filters[filterBy] = filters;
+        setMyFilters(newFilters);
+    };
 
     
     return (
@@ -37,11 +50,18 @@ const init = () => {
                     {/* {JSON.stringify(categories)} */}
                     <h4>Filter by Categories</h4>
                     <ul>
-                        <Checkbox categories={categories} />
+                    <Checkbox
+                            categories={categories}
+                            handleFilters={filters =>
+                                handleFilters(filters, "category")
+                            }
+                        />
                     </ul>
                 </div>
 
-                <div className="col-8">right</div>
+                <div className="col-8">
+                    {JSON.stringify(myFilters)}
+                </div>
             </div>
         </Layout>
     );
