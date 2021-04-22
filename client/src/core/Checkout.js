@@ -101,14 +101,15 @@ const handleAddress = event => {
 
                     createOrder(userId, token, createOrderData)
 
-
-                    setData({ ...data, success: response.success });
+                    .then(response =>{
+                    // setData({ ...data, success: response.success });
                     emptyCart(() => {
                         setRun(!run);
                         console.log("payment success and empty cart");
-                        setData({loading: false})
+                        setData({loading: false, success: true})
                     });
                 })
+            })
                 .catch(error => {
                     console.log(error)
                     setData({loading: false})
