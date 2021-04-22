@@ -11,6 +11,7 @@ const {
 	listRelated,
 	listCategories,
 	listBySearch,
+	listSearch,
 	photo,
 } = require('../controllers/product');
 const { requireSign, isAuth, isAdmin } = require('../controllers/auth');
@@ -23,6 +24,7 @@ router.delete('/product/:productId/:userId', requireSign, isAuth, isAdmin, remov
 router.put('/product/:productId/:userId', requireSign, isAuth, isAdmin, update);
 
 router.get('/products', list);
+router.get('/products/search', listSearch);
 router.get('/products/related/:productId', listRelated);
 router.get('/products/categories', listCategories);
 router.post('/products/by/search', listBySearch);
