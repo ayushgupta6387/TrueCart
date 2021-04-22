@@ -38,7 +38,7 @@ useEffect(() => {
 }, []);
 
 	return (
-		<Layout title="HomePage" description="Node React E-commerce App" className="container-fluid">
+		<Layout title="HomePage" description="E-commerce App" className="container-fluid">
 		  {/* {JSON.stringify(productsByArrival)} */}
             <Search/>
 		  <h2 className="mb-4">New Arrivals</h2>

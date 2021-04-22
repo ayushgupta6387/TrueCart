@@ -16,19 +16,19 @@ const Menu = ({ history}) => {
 	return (
 		<div>
 			<ul className="nav nav-tabs bg-primary">
-				<li className="nav-item">
+				<li className="nav-item hoverItem">
 					<Link className="nav-link" style={isActive(history, '/')} to="/">
 						Home
 					</Link>
 				</li>
 
-                <li className="nav-item">
+                <li className="nav-item hoverItem">
 					<Link className="nav-link" style={isActive(history, '/shop')} to="/shop">
 						Shop
 					</Link>
 				</li>
 
-                <li className="nav-item">
+                <li className="nav-item hoverItem">
                 <Link
                     className="nav-link"
                     style={isActive(history, "/cart")}
@@ -42,7 +42,7 @@ const Menu = ({ history}) => {
             </li>
 
 				{isAuthenticated() && isAuthenticated().user.role === 0 && (
-                <li className="nav-item">
+                <li className="nav-item hoverItem">
                     <Link
                         className="nav-link"
                         style={isActive(history, "/user/dashboard")}
@@ -54,7 +54,7 @@ const Menu = ({ history}) => {
             )}
 
             {isAuthenticated() && isAuthenticated().user.role === 1 && (
-                <li className="nav-item">
+                <li className="nav-item hoverItem">
                     <Link
                         className="nav-link"
                         style={isActive(history, "/admin/dashboard")}
@@ -67,7 +67,7 @@ const Menu = ({ history}) => {
 
 				{!isAuthenticated() && (
                 <React.Fragment>
-                    <li className="nav-item">
+                    <li className="nav-item hoverItem">
                         <Link
                             className="nav-link"
                             style={isActive(history, "/signin")}
@@ -77,7 +77,7 @@ const Menu = ({ history}) => {
                         </Link>
                     </li>
 
-                    <li className="nav-item">
+                    <li className="nav-item hoverItem">
                         <Link
                             className="nav-link"
                             style={isActive(history, "/signup")}
@@ -93,7 +93,7 @@ const Menu = ({ history}) => {
                 <li className="nav-item">
                     <span
                         className="nav-link"
-                        style={{ cursor: "pointer", color: "#ffffff" }}
+                        style={{ cursor: "pointer", color: "#ffffff", marginTop: "5px" }}
                         onClick={() =>
                             signout(() => {
                                 history.push("/");
