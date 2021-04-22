@@ -29,3 +29,9 @@ products to the users with the best price.
 
 25-Mar-2021
   Frontend work starts
+
+18-Apr-2021
+  Frontend work finish
+ 
+22-Apr-2021
+  Add Synopsis, ppt and report of our project
