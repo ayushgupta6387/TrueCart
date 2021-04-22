@@ -35,3 +35,9 @@ products to the users with the best price.
  
 22-Apr-2021
   Add Synopsis, ppt and report of our project
+  
+Home page 
+
+
+![Screenshot (11)](https://user-images.githubusercontent.com/44112369/115746712-2d08f500-a3b2-11eb-993c-86f9f43b9370.png)
+
