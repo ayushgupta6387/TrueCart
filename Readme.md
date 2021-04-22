@@ -25,13 +25,13 @@ products to the users with the best price.
   Backend work starts
  
 20-Mar-2021
-  Backend work finish
+  Backend work finishes
 
 25-Mar-2021
   Frontend work starts
 
 18-Apr-2021
-  Frontend work finish
+  Frontend work finishes
  
 22-Apr-2021
   Add Synopsis, ppt and report of our project
@@ -40,4 +40,13 @@ Home page
 
 
 ![Screenshot (11)](https://user-images.githubusercontent.com/44112369/115746712-2d08f500-a3b2-11eb-993c-86f9f43b9370.png)
+
+Admin Page
+
+![Screenshot (24)](https://user-images.githubusercontent.com/44112369/115747300-bf10fd80-a3b2-11eb-8623-953fc74d47d0.png)
+
+User Dashboard
+
+![Screenshot (21)](https://user-images.githubusercontent.com/44112369/115747346-ce904680-a3b2-11eb-876a-6a461a421abf.png)
+
 
